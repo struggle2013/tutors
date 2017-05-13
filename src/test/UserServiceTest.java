@@ -13,7 +13,7 @@ public class UserServiceTest {
 	User user=null;
 	@Test
 	public void TestGetUser(){
-		userService.getUser("2292946166@qq.com", "123456");
+		userService.getUser("2292946166@qq.com", "12356");
 		System.out.println(user);
 	}
 	@Test
