@@ -1,7 +1,12 @@
 package servlet;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import dao.ApplyDao;
+import dao.OpinionDao;
 import dao.UserDao;
 import entity.Apply;
+import entity.Opinion;
 import entity.User;
 
 /**
@@ -21,25 +30,17 @@ import entity.User;
 public class CheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String userId;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	private ApplyDao applyDao;
 	public CheckServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		applyDao = new ApplyDao();
 	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String param = request.getParameter("param");
 		User user = (User) request.getSession().getAttribute("user");
 		userId = user.getId();
-		System.out.println(param + "\n");
+		System.out.println("参数："+param + "\n");
 		switch (param) {
 		case "technology":
 			technology(request, response);
@@ -52,11 +53,41 @@ public class CheckServlet extends HttpServlet {
 			break;
 		case "schoolDegree":
 			schoolDegree(request, response);
+			break;
+		case "saveOpinion":
+			saveOpinion(request,response);
+			break;
 		default:
 			break;
 		}
 	}
 
+	private void saveOpinion(HttpServletRequest request, HttpServletResponse response) {
+		OpinionDao opinonDao = new OpinionDao();
+
+		Opinion opinion = new Opinion(UUID.randomUUID().toString());
+
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String time = sdf.format(date);
+		opinion.setTime(time);
+
+		Map<String, String[]> map = request.getParameterMap();
+		try {
+			BeanUtils.populate(opinion, map);
+			System.out.println("意见是:" + opinion);
+			opinonDao.add(opinion);
+			List<Apply> applys= applyDao.getTechnologyCheck();
+			request.setAttribute("applys", applys);
+			System.out.println("获取到的提交名单："+applys);
+			request.getRequestDispatcher("apply/technology.jsp").forward(request, response);
+			
+		} catch (  IllegalAccessException | InvocationTargetException | ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	private void schoolDegree(HttpServletRequest request, HttpServletResponse response) {
 		
 		UserDao userdao = new UserDao();
@@ -107,7 +138,7 @@ public class CheckServlet extends HttpServlet {
 		} else {
 			try {
 				ApplyDao applyDao = new ApplyDao();
-				List<Apply> applys= applyDao.getAllIsNotTutor();
+				List<Apply> applys= applyDao.getAcademyCheck();
 				request.setAttribute("applys", applys);
 				System.out.println("获取到的提交名单："+applys);
 				request.getRequestDispatcher("apply/academy.jsp").forward(request, response);
@@ -129,8 +160,8 @@ public class CheckServlet extends HttpServlet {
 				request.getRequestDispatcher("apply/missPower.html").forward(request, response);
 				return;
 			} else {
-				ApplyDao applyDao = new ApplyDao();
-				List<Apply> applys= applyDao.getAllIsNotTutor();
+				
+				List<Apply> applys= applyDao.getTechnologyCheck();
 				request.setAttribute("applys", applys);
 				System.out.println("获取到的提交名单："+applys);
 				request.getRequestDispatcher("apply/technology.jsp").forward(request, response);

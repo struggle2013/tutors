@@ -28,6 +28,7 @@ import dao.UserDao;
 import entity.Apply;
 import entity.Opinion;
 import entity.Paper;
+import entity.Schedule;
 import entity.User;
 
 /**
@@ -37,13 +38,13 @@ import entity.User;
 public class ApplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Apply apply = null;
-
+	private ApplyDao applyDao=null;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ApplyServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		 applyDao= new ApplyDao();
 	}
 
 	/**
@@ -55,28 +56,47 @@ public class ApplyServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		String id = user.getId();
 		String action = request.getParameter("action");
-		System.out.println("request路径："+request.getRequestURL()+"action:"+action);
+		//System.out.println("request路径："+request.getRequestURL()+"action:"+action);
 		switch (action) {
 		case "apply":
-			apply = new Apply(UUID.randomUUID().toString());
-			apply.setUserId(id);
-			ApplyDao applyDao = new ApplyDao();
-			upload(request, response);
-			if (applyDao.getApply(id) != null) {
+			Map<String, String[]> map = request.getParameterMap();
+			apply = applyDao.getApply(id);
+			if (apply!= null) {
+				try {
+					BeanUtils.populate(apply, map);
+					//System.out.println("map:"+map);
+					//System.out.println("更新后的申请apply:"+apply);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
 				applyDao.update(apply);
 			} else {
-				applyDao.addPaper(apply);
+				apply = new Apply(UUID.randomUUID().toString());
+				apply.setUserId(id);
+				try {
+					BeanUtils.populate(apply, map);
+					//System.out.println("apply:"+apply);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+				applyDao.addApply(apply);
 			}
-			request.getRequestDispatcher("apply/schedule.jsp").forward(request, response);
+			request.setAttribute("msg", "提交成功！");
+			request.getRequestDispatcher("apply/msg.jsp").forward(request, response);
 			break;
 		case "schedule":
+			Apply apply= applyDao.getApply(id);
+			if(apply==null){
+				request.setAttribute("msg", "你还没有提交申请");
+				request.getRequestDispatcher("apply/msg.jsp").forward(request, response);
+				break;
+			}
+			Schedule schedule = applyDao.getSchedule(id);
+			request.setAttribute("schedule", schedule);
 			request.getRequestDispatcher("apply/schedule.jsp").forward(request, response);
 			break;
 		case "query":
 			query(request,response);
-			break;
-		case "pass":
-			pass(request,response);
 			break;
 		default:
 			break;
@@ -130,79 +150,6 @@ public class ApplyServlet extends HttpServlet {
 		}
 	}
 
-	private void upload(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			// 1. 创建工厂对象
-			FileItemFactory factory = new DiskFileItemFactory();
-			// 2. 文件上传核心工具类
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			// 设置大小限制参数
-			upload.setFileSizeMax(10 * 1024 * 1024); // 单个文件大小限制
-			upload.setSizeMax(50 * 1024 * 1024); // 总文件大小限制
-			upload.setHeaderEncoding("UTF-8"); // 对中文文件编码处理
-
-			System.out.println("当前表单是否是文件上传表单：" + upload.isMultipartContent(request));
-			// 判断
-			if (upload.isMultipartContent(request)) {
-				// 3. 把请求数据转换为list集合
-				List<FileItem> list = upload.parseRequest(request);
-				// 遍历
-				for (FileItem item : list) {
-					// 判断：普通文本数据
-					if (item.isFormField()) {
-						// 获取名称
-						String name = item.getFieldName();
-						item.getString("UTF-8");
-
-						// 获取值
-						String value = item.getString("utf-8");
-						switch (name) {
-						case "category":
-							apply.setCategory(value);
-							break;
-						case "oneSubject":
-							apply.setOneSubject(value);
-							break;
-						case "twoSubject":
-							apply.setTwoSubject(value);
-							break;
-						case "research":
-							apply.setResearch(value);
-							break;
-						default:
-							break;
-						}
-						System.out.println(name + " " + value);
-					}
-					// 文件表单项
-					else {
-						/******** 文件上传 ***********/
-						// a. 获取文件名称
-						String name = item.getName();
-
-						// ----处理上传文件名重名问题----
-						// a1. 先得到唯一标记
-						String id = UUID.randomUUID().toString();
-						// a2. 拼接文件名
-						name = id  + name;
-						apply.setFile(name);
-						apply.setFile(name);
-						// b. 得到上传目录
-						String basePath = getServletContext().getRealPath("/upload");
-						System.out.println("文件上传路径：" + basePath);
-						// c. 创建要上传的文件对象
-						File file = new File(basePath, name);
-						// d. 上传
-						item.write(file);
-						item.delete(); // 删除组件运行时产生的临时文件
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

@@ -17,14 +17,14 @@
     <div class="col-sm-12">
       <div class="ibox">
         <div class="ibox-title">
-          <h3>所有未审批的教师</h3>
+          <h3>所有未通过科技处审查的教师</h3>
         </div>
         <div class="ibox-content">
           <div class="row m-b-sm m-t-sm">
             <div class="col-md-1">
-              <button type="button" onclick="refresh()" class="btn btn-white btn-sm">
+              <a type="button"  class="btn btn-white btn-sm" href="/tutors/CheckServlet?param=technology">
                 <i class="fa fa-refresh"></i> 刷新
-              </button>
+              </a>
             </div>
             <div class="col-md-11">
               <div class="input-group">
@@ -58,23 +58,22 @@
                     <td class="project-title">${apply.category }</td>
                     <td class="project-title">${apply.oneSubject }</td>
                     <td class="project-title">${apply.twoSubject }</td>
-                    <td class="project-title">${apply.research }</td>
+                    <td class="project-title">${apply.direction }</td>
                     <td class="project-title">
                       <a href="ApplyServlet?action=query&userId=${apply.userId }"
                         class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看资料 </a>
 
                       <button class="btn btn-success" data-toggle="modal" data-target="#myModal"
-                        onclick="pass(${apply.userId})">通过</button>
+                        onclick="pass('${apply.userId}')">通过</button>
                       <button class="btn btn-danger" data-toggle="modal" data-target="#myModal"
-                        onclick="notPass(${apply.userId})">不通过</button>
+                        onclick="notPass('${apply.userId}')">不通过</button>
+                      <a class="btn btn-info" href="UploadServlet?fileName='${apply.file }'">下载文档</a>
                       <%--    
                         href="ApplyServlet?action=notPass?userId=${apply.userId }"
                         class="btn btn-danger"><i></i> 不通过 </a> --%>
                     </td>
                   </tr>
                 </c:forEach>
-
-
               </tbody>
             </table>
           </div>
@@ -94,12 +93,12 @@
         </div>
         <div class="modal-body">
           <form class="form-horizontal" id="dialogII"
-            action="/tutors/TechnologyCheck?action=saveOpinion" method="post">
+            action="/tutors/CheckServlet?param=saveOpinion" method="post">
             <div class="form-group">
               <label for="wzmc" class="col-sm-2 control-label">审批人</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control input-sm" name="chargePerson"
-                  placeholder="审批人" style="width: 30em;">
+                  placeholder="审批人q" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
@@ -112,7 +111,7 @@
             <div class="modal-footer">
               <input type="text" name="kind" value="technology" hidden="hidden"> <input
                 type="text" name="userId" value="" hidden="hidden" id="userId"> <input
-                type="text" name="agree" value="" hidden="hidden" id="agree">
+                type="number" name="agree" value="" hidden="hidden" id="agree">
               <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">取消</button>
               <button type="submit" class="btn btn-primary">保存</button>
             </div>
@@ -124,18 +123,16 @@
   </div>
   <script src="/tutors/js/jquery.min.js?v=2.1.4"></script>
   <script src="/tutors/js/bootstrap.min.js"></script>
-  <!-- <script type="text/javascript">
-	    function refresh() {
-		window.location.reload();
-	    }
+   <script type="text/javascript">
+	    
 	    function pass(value){
 			$("#userId").val(value);
 			$("#agree").val(1);
 	    }
 	    function notPass(value){
 		$("#userId").val(value);
-		$("#agree").val(0);
+		$("#agree").val(-1);
 	    }
-	</script> -->
+	</script> 
 </body>
 </html>

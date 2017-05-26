@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>修改密码</title>
+<title>导师申请</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 
@@ -19,10 +19,8 @@
 <!-- <link href="css/plugins/iCheck/custom.css" rel="stylesheet"> -->
 <link href="/tutors/css/animate.css" rel="stylesheet">
 <link href="/tutors/css/style.css?v=4.1.0" rel="stylesheet">
-<script></script>
-<script src="/tutors/js/jquery.min.js?v=2.1.4"></script>
-<script src="/tutors/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="/tutors/js/plugins/validate/messages_zh.min.js"></script>
+<link rel="stylesheet" href="/tutors/js/plugins/layui/css/layui.css">
+
 </head>
 
 <body class="gray-bg">
@@ -36,56 +34,52 @@
 
 
       <form class="m-t" role="form" id="form" action="/tutors/ApplyServlet?action=apply"
-        enctype="multipart/form-data" method="post">
+        method="post">
         <div class="form-group">
-          <span>类型</span> <label><input name="category" type="radio" value="学术型" />学术型 </label> <label><input
-            name="category" type="radio" value="专业学位" />专业学位 </label>
+          <span>类型</span> <label><input name="category" type="radio" value="学术型"
+            checked="checked" />学术型 </label> <label><input name="category" type="radio"
+            value="专业学位" />专业学位 </label>
         </div>
         <div class="form-group">
           <span>一级学科</span> <input type="text" class="form-control" id="oneSubject"
-            name="oneSubject" placeholder="请输入一级学科" value="计算机科学与技术">
+            name="oneSubject" placeholder="请输入一级学科" value="计算机科学与技术" required="required">
         </div>
         <div class="form-group">
           <span>二级学科</span> <input type="text" class="form-control" name="twoSubject"
-            placeholder="请输入二级学科" value="计算机应用 ">
+            placeholder="请输入二级学科" value="计算机应用 " required="required">
         </div>
         <div class="form-group">
-          <span>研究方向</span> <input type="text" class="form-control" name="research"
-            placeholder="请输入研究方向" value="图像图像处理">
+          <span>研究方向</span> <input type="text" class="form-control" name="direction"
+            placeholder="请输入研究方向" value="图像图像处理" required="required">
         </div>
         <div class="form-group">
-          <input type="file" name="file" />
+          <input type="file" name="file" class="layui-upload-file"  lay-type="file" />
+          <input type="text" name="file" value="" hidden="hidden" id="filename">
         </div>
         <button type="submit" class="btn btn-primary block full-width " id="apply">申请</button>
-
-
 
       </form>
     </div>
   </div>
 
   <!-- 全局js -->
-
+  <script src="/tutors/js/jquery.min.js?v=2.1.4"></script>
   <script src="/tutors/js/bootstrap.min.js?v=3.3.6"></script>
-  <!-- iCheck -->
-  <!--   <script src="/tutors/js/plugins/iCheck/icheck.min.js"></script> -->
-  <!-- validate数据检查 -->
-  <script src="/tutors/js/plugins/layer/layer.min.js"></script>
+  <script src="/tutors/js/plugins/validate/jquery.validate.min.js"></script>
+  <script src="/tutors/js/plugins/validate/messages_zh.min.js"></script>
+  <script src="/tutors/js/plugins/layui/layui.js"></script>
   <script>
-	    var validate;
-	    $(document).ready(function() {
-
-		validate = $("#form").validate({
-		    rules : {
-			category : "required",
-			oneSubject : "required",
-			twoSubject : "required",
-			research : "required"
+	    var path;
+	    layui.use('upload', function() {
+		layui.upload({
+		    url : '/tutors/UploadServlet',
+		    success : function(src) {
+			console.log(src.filename);
+			$("#filename").val(src.filename);
+			path = "/upload/" + src.filename;
+			console.log("文件路径" + path);
+			// $("#").attr('src', path);
 		    }
-
-		});
-		$("#apply").click(function() {
-		    layer.msg('提交成功')
 		});
 	    });
 	</script>

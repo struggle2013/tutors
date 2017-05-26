@@ -64,7 +64,7 @@ private void sysUserLogin(HttpServletRequest request, HttpServletResponse respon
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String identity = request.getParameter("identity");
-		System.out.println("用户的身份是："+identity);
+		//System.out.println("用户的身份是："+identity);
 		if (identity.equals("user")) {
 			userlogin(request,response);
 		} else if (identity.equals("sysUser")) {

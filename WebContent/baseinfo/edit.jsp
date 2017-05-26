@@ -7,8 +7,7 @@
 <link href="/tutors/css/bootstrap.min.css" rel="stylesheet">
 <link href="/tutors/css/style.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="/tutors/css/plugins/dropzone/basic.css" rel="stylesheet">
-<link href="/tutors/css/plugins/dropzone/dropzone.css" rel="stylesheet">
+<link rel="stylesheet" href="/tutors/js/plugins/layui/css/layui.css">
 <style type="text/css">
 th span.right {
 	float: right;
@@ -24,7 +23,8 @@ th span.right {
           <div class="ibox-tools"></div>
         </div>
         <div class="" id="ibox-content">
-          <form method="post" action="${pageContext.request.contextPath}/UpdateUser">
+          <form method="post"
+            action="${pageContext.request.contextPath}/UpdateUser?action=updateInfo">
             <table id="layout1" class="table table-bordered">
               <tbody>
                 <tr>
@@ -37,24 +37,23 @@ th span.right {
 
                     <c:choose>
                       <c:when test="${empty user.pic}">
-                        <img id="headerImg" disabled="disabled" src=""
+                        <img id="headerImg" src=""
                           style="height: 100px; width: 80px; border-width: 0px;">
                         <div style="position: absolute; top: 190px;">
-                          <input type="file" name="pic" title="上传文件"
+                          <input type="file" name="name" class="layui-upload-file"
                             accept="image/png,image/gif,image/jpeg">
                         </div>
                       </c:when>
                       <c:otherwise>
-                        <img id="headrImg" disabled="disabled" src="/tutors/img/${user.pic }"
+                        <img id="headerImg" src="/upload/${user.pic }"
                           style="height: 100px; width: 80px; border-width: 0px;">
                         <div style="position: absolute; top: 190px;">
-                          <input type="file" title="上传文件" name="pic"
-                            accept="image/png,image/gif,image/jpeg"> <input type="text"
-                            name="pic" value="${user.pic }" hidden="hidden">
+                          <input type="file" class="layui-upload-file" name="name"
+                            accept="image/png,image/gif,image/jpeg">
                         </div>
                       </c:otherwise>
                     </c:choose>
-
+                    <input type="text" name="pic" value="${user.pic }" hidden="hidden" id="filename">
 
                   </td>
 
@@ -168,6 +167,23 @@ th span.right {
       </div>
     </div>
   </div>
+  <script src="/tutors/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/tutors/js/plugins/layui/layui.js"></script>
+  <script>
+	    var path;
+	    layui.use('upload', function() {
 
+		layui.upload({
+		    url : '/tutors/UploadServlet',
+		    success : function(src) {
+			console.log(src.filename);
+			$("#filename").val(src.filename);
+			path = "/upload/" + src.filename;
+			console.log("文件路径" + path);
+			$("#headerImg").attr('src', path);
+		    }
+		});
+	    });
+	</script>
 </body>
 </html>

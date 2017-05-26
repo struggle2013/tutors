@@ -58,7 +58,7 @@
                     <td class="project-title">${apply.category }</td>
                     <td class="project-title">${apply.oneSubject }</td>
                     <td class="project-title">${apply.twoSubject }</td>
-                    <td class="project-title">${apply.research }</td>
+                    <td class="project-title">${apply.direction }</td>
                     <td class="project-title">
                       <a href="ApplyServlet?action=query&userId=${apply.userId }"
                         class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看资料 </a>

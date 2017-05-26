@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  * 实现:处理get与post方式提交的编码
  * 
  */
-@WebFilter(description = "对字符编码进行过滤")
+@WebFilter(description = "对字符编码进行过滤",filterName="CharacterEncodingFilter",urlPatterns="/*")
 public class CharacterEncodingFilter implements Filter {
 	private String defaultCharset = "UTF-8";
-	private FilterConfig filterConfig;
+	
     /**
      * Default constructor. 
      */
@@ -43,11 +43,9 @@ public class CharacterEncodingFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		
-		//获取web.xml配置文件中配置编码
-		String charset = filterConfig.getInitParameter("charset");
-		if (charset == null) {
-			charset = defaultCharset;
-		}
+		//配置编码
+		String charset = defaultCharset;
+		
 		
 		//-----------post-----------
 		request.setCharacterEncoding(charset);
@@ -95,7 +93,7 @@ public class CharacterEncodingFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		this.filterConfig = fConfig;
+		
 	}
 
 }

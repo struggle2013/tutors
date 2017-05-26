@@ -42,7 +42,7 @@ public class UserInfoQuery extends HttpServlet {
 			
 		}else if (action.equals("some")){
 			String name = request.getParameter("name");
-			System.out.println("查询的姓名是:"+name);
+			//System.out.println("查询的姓名是:"+name);
 			users = userService.queryName(name);
 			request.removeAttribute("users");
 			request.setAttribute("users", users);

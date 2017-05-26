@@ -16,7 +16,7 @@
 <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
 <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
 
-<link href="css/animate.css" rel="stylesheet">
+<!-- <link href="css/animate.css" rel="stylesheet"> -->
 <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
 <script>
@@ -34,7 +34,7 @@
       <div>
         <h1 class="logo-name">CUIT</h1>
       </div>
-      <h3>欢迎使用 研究生导师管理系统登陆</h3>
+      <h3>欢迎使用 研究生导师管理系统登录</h3>
 
       <form class="m-t" role="form">
         <div class="form-group">
@@ -58,8 +58,8 @@
   </div>
 
   <!-- 全局js -->
-  <script src="js/jquery.min.js?v=2.1.4"></script>
-  <script src="js/bootstrap.min.js?v=3.3.6"></script>
+ <script src="js/jquery.min.js?v=2.1.4"></script>
+  <!-- <script src="js/bootstrap.min.js?v=3.3.6"></script>  -->
 
   <script type="text/javascript">
 $(function () {

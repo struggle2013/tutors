@@ -9,18 +9,18 @@
 </head>
 <body>
   <div>
-    <div class="col-sm-9 col-sm-offset-1">
+    <div class="col-sm-10 col-sm-offset-1">
 
       <div id="view">
         <h1 class="my-form-group-label">近三年发表的主要学术论文（2014.6.1-2017.5.31）</h1>
-        <p class="text-warning">只填写第一、二作者或通讯作者发表的论文，学术论文为已正式刊出的论文，录用待发表的请不要填写。检索情况请填写：SCI、EI、SSCI、ISTP、CSSCI、核心期刊等。</p>
+        <p class="text-warning">只填写第一、二作者或通讯作者发表的论文，学术论文为已正式刊出的论文，录用待发表的请不要填写。检索情况请填写：SCI、EI、SSCI、CSSCI。</p>
         <div class="btn-group btn-group-xs" role="group" aria-label="" style="margin-bottom: 0.2em;">
           <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
             <span class="glyphicon glyphicon-plus"></span> 增加
           </button>
-          <button type="button" class="btn btn-default">
-            <a class="glyphicon" href="/tutors/DataServlet?action=paper">刷新</a>
-          </button>
+
+          <a class="btn btn-default" href="/tutors/DataServlet?action=paper">刷新</a>
+
         </div>
         <table class="table table-striped table-bordered">
           <thead>
@@ -36,21 +36,18 @@
           </thead>
           <tbody id="vbody">
             <c:forEach var="paper" items="${papers }">
-              <tr>
+              <tr id="${paper.id }">
                 <td>${paper.name }</td>
                 <td>${paper.publication }</td>
                 <td>${paper.publicationTime }</td>
                 <td>${paper.retrieval }</td>
                 <td>${paper.signatureOrder }</td>
                 <td>${paper.school}</td>
-                <td>
-                  <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#myModalUpdate">
-                    <span class="glyphicon glyphicon-pencil"></span> 修改
-                  </button>
+                <td colspan="2">
+                  <a type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#myModalUpdate" onclick="editInfo('${paper.id}',this)"> 修改 </a>
                   <button type="button" class="btn btn-danger del" onclick="del('${paper.id}')">
-                    <span class="glyphicon glyphicon-minus"></span> 删除
-                  </button>
+                    删除</button>
 
                 </td>
               </tr>
@@ -160,14 +157,14 @@
             <div class="form-group">
               <label for="wzmc" class="col-sm-2 control-label">名称</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="name" placeholder="名称"
-                  style="width: 30em;" value="协同过滤算法的研究与实现">
+                <input type="text" class="form-control input-sm" name="name" id="name"
+                  placeholder="名称" style="width: 30em;" value="协同过滤算法的研究与实现">
               </div>
             </div>
             <div class="form-group">
               <label for="kwhymc" class="col-sm-2 control-label">发表刊物或出版单位</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="publication"
+                <input type="text" class="form-control input-sm" name="publication" id="publication"
                   placeholder="刊物/会议名称，卷（期）号，会议地点" style="width: 30em;" value="中国知网"> <span
                   id="helpBlock" class="help-block">请按以下格式填写：<br> 期刊：名称；卷（期）；ISSN号<br>
                   会议：名称；地点；
@@ -179,15 +176,16 @@
               <div class="col-sm-10">
                 <div id="fbny1" class="input-append date">
                   <input type="date" class="form-control input-sm" name="publicationTime"
-                    value="2010-05-01" style="width: 30em;"> <span class="add-on"><i
-                    class="icon-th"></i></span>
+                    id="publicationTime" value="2010-05-01" style="width: 30em;"> <span
+                    class="add-on"><i class="icon-th"></i></span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label for="jsxt" class="col-sm-2 control-label">检索系统</label>
               <div class="col-sm-10">
-                <select class="form-control input-sm" name="retrieval" style="width: 8em;">
+                <select class="form-control input-sm" name="retrieval" style="width: 8em;"
+                  id="retrieval">
                   <option value=""></option>
                   <option value="EI">EI</option>
                   <option value="SCI">SCI</option>
@@ -199,7 +197,8 @@
             <div class="form-group">
               <label for="pm" class="col-sm-2 control-label">本人排序</label>
               <div class="col-sm-10">
-                <select class="form-control input-sm" name="signatureOrder" style="width: 14em;">
+                <select class="form-control input-sm" name="signatureOrder" style="width: 14em;"
+                  id="signatureOrder">
                   <option value="通讯作者">通讯作者</option>
                   <option value="第1作者">第1作者</option>
                   <option value="第2作者（导师为1作）">第2作者（导师为1作）</option>
@@ -209,15 +208,16 @@
             <div class="form-group">
               <label for="wzmc" class="col-sm-2 control-label">是否为本校</label>
               <div class="col-sm-10">
-                <select class="form-control input-sm" name="school" style="width: 14em;">
+                <select class="form-control input-sm" name="school" style="width: 14em;" id="school">
                   <option value="是">是</option>
                   <option value="否">否</option>
                 </select>
               </div>
             </div>
+            <input type="text" value="" style="display: none;" id="id">
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">取消</button>
-              <button type="submit" class="btn btn-primary">保存</button>
+              <button type="button" class="btn btn-primary" onclick="update()">保存</button>
             </div>
           </form>
         </div>
@@ -230,15 +230,72 @@
   <script src="/tutors/js/bootstrap.min.js?v=3.3.6"></script>
   <script src="/tutors/js/plugins/layer/layer.min.js"></script>
   <script>
+	    function update() {
+		var name = $("#myModalUpdate #name").val();
+		var publication = $("#myModalUpdate #publication").val();
+		var publicationTime = $("#myModalUpdate #publicationTime")
+			.val();
+		var retrieval = $("#myModalUpdate #retrieval").val();
+		var school = $("#myModalUpdate #school").val();
+		var signatureOrder = $("#myModalUpdate #signatureOrder").val();
+		var id = $("#myModalUpdate #id").val();
+		$.ajax({
+		    url : "/tutors/DataServlet?action=update&param=paper",
+		    type : "post",
+		    data : {
+			id : id,
+			name : name,
+			publication : publication,
+			publicationTime : publicationTime,
+			retrieval : retrieval,
+			signatureOrder:signatureOrder,
+			school : school,
+		    },
+		    success : function(data) {
+			var paperTag = $("#" + id).children();
+			paperTag[0].innerText = name;
+			paperTag[1].innerText = publication;
+			paperTag[2].innerText = publicationTime;
+			paperTag[3].innerText = retrieval;
+			paperTag[4].innerText = signatureOrder;
+			paperTag[5].innerText = school;
+			$("#myModalUpdate").modal("hide");
+		    }
+		});
+	    }
+	    function del(id) {
+		var ok = confirm("你确定要删除吗?");
+		if (ok) {
+		    $.ajax({
+			url : "/tutors/DataServlet?action=del&param=paper",
+			type : "post",
+			data : {
+			    id : id
+			},
+			success : function(data) {
+			    $("#" + id).remove();
+			    console.log(data);
+			}
+		    });
+		}
+	    }
 
-	    function del(id){
-    		var ok = confirm("你确定要删除吗?");
-    		if (ok) {
-    		    $.ajax({
-    			    url:"/tutors/DataServlet?action=del&param=paper",
-    				data:{id :id}
-    			});
-    		}
+	    function editInfo(id, obj) {
+		var paperTag = $("#" + id).children();
+		var name = paperTag[0].innerText;
+		var publication = paperTag[1].innerText;
+		var publicationTime = paperTag[2].innerText;
+		var retrieval = paperTag[3].innerText;
+		var signatureOrder = paperTag[4].innerText;
+		var school = paperTag[5].innerText;
+
+		$("#myModalUpdate #name").val(name);
+		$("#myModalUpdate #publication").val(publication);
+		$("#myModalUpdate #publicationTime").val(publicationTime);
+		$("#myModalUpdate #retrieval").val(retrieval);
+		$("#myModalUpdate #school").val(school);
+		$("#myModalUpdate #signatureOrder").val(signatureOrder);
+		$("#myModalUpdate #id").val(id);
 	    }
 	</script>
 </body>

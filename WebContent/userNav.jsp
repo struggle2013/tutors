@@ -49,14 +49,15 @@
           <li><a class="J_menuItem" href="index_v1.jsp"> <i class="fa fa-home"></i> <span
               class="nav-label">主页</span>
           </a></li>
-          <li><a href="baseinfo/info.jsp" class="J_menuItem"> <i class="fa fa-address-card"></i>
-              <span class="nav-label">基本信息管理</span> <span class="fa arrow"></span>
+          <li><a href="#"> <i class="fa fa-address-card"></i> <span class="nav-label">基本信息管理</span>
+              <span class="fa arrow"></span>
           </a>
             <ul class="nav nav-second-level">
+              <li><a class="J_menuItem" href="baseinfo/info.jsp">个人信息查看</a></li>
               <li><a class="J_menuItem" href="baseinfo/edit.jsp">个人信息修改</a></li>
               <li><a class="J_menuItem" href="baseinfo/passwordChange.jsp">登录密码修改</a></li>
-              <li><a class="J_menuItem" href="UserInfoQuery?action=all">用户信息查询</a></li>
-              <li><a class="J_menuItem" href="baseinfo/manager.jsp">管理员信息</a></li>
+              <li><a class="J_menuItem" href="UserInfoQuery?action=all">用户查询</a></li>
+
             </ul></li>
 
           <li class="line dk"></li>
@@ -76,9 +77,9 @@
             <ul class="nav nav-second-level">
               <li><a class="J_menuItem" href="apply/start.jsp">导师申请</a></li>
               <li><a class="J_menuItem" href="ApplyServlet?action=schedule">查看申请进度</a></li>
-              <li><a class="J_menuItem" href="TechnologyCheck?action=queryApply">科技处审查</a></li>
+              <li><a class="J_menuItem" href="CheckServlet?param=technology">科技处审查</a></li>
               <li><a class="J_menuItem" href="CheckServlet?param=academy">学院初审</a></li>
-              <li><a class="J_menuItem" href="CheckServlet?param=degree">学位评定委员会审核</a></li>
+              <li><a class="J_menuItem" href="CheckServlet?param=degree">学位分评定委员会审核</a></li>
               <li><a class="J_menuItem" href="CheckServlet?param=schoolDegree">校学位评定委员会审核</a></li>
             </ul></li>
 

@@ -48,7 +48,7 @@
                   <div class="col-sm-4">
                     <div class="text-center">
                       <img alt="image" class="img-circle m-t-xs img-responsive"
-                        src="${pageContext.request.contextPath}/img/${user.pic}">
+                        src="/upload/${user.pic}">
                     </div>
                   </div>
                   <div class="col-sm-8">

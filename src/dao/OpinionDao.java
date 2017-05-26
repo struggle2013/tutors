@@ -55,6 +55,18 @@ public class OpinionDao {
 		try {
 			queryRunner.update(sql, opinion.getId(),opinion.getAgree(),opinion.getSuggestion(),
 					opinion.getTime(),opinion.getChargePerson(),opinion.getKind(),opinion.getUserId());
+			updateSchedule(opinion);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	public boolean updateSchedule(Opinion opinion){
+		
+		String sql = "update schedule set "+opinion.getKind()+"="+opinion.getAgree()+" where id = ?";
+		try {
+			queryRunner.update(sql, opinion.getUserId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

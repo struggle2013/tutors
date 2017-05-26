@@ -87,7 +87,7 @@ public class BookDao {
 				+ "school=? where id=?";
 		try {
 			queryRunner.update(sql, book.getName(), book.getPress(), book.getPressTime(),
-					book.getEditWordNumber(), book.getSignatureOrder(), book.getSchool(), book.getUserId());
+					book.getEditWordNumber(), book.getSignatureOrder(), book.getSchool(), book.getId());
 		} catch (SQLException e) {
 			System.out.println("数据库更新错误");
 			e.printStackTrace();

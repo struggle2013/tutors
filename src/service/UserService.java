@@ -8,29 +8,54 @@ import entity.User;
 
 public class UserService {
 	private UserDao userdao = new UserDao();
-	public User getUser(String username,String password){
-		User user= userdao.getUser(username);
-		if(user.getPassword().equals(password)){return user;}
+
+	public User getUser(String username, String password) {
+		User user = userdao.getUser(username);
+		if (user == null)
+			return null;
+		if (user.getPassword().equals(password)) {
+			return user;
+		}
 		return null;
 	}
-	public Boolean checkUser(String username){
+
+	public Boolean checkUser(String username) {
 		User user = userdao.getUser(username);
-		if(user!=null){return true;}
+		if (user != null) {
+			return true;
+		}
 		return false;
 	}
-	public Boolean registerUser(User user){
+
+	public Boolean registerUser(User user) {
 		return userdao.insertUser(user);
 	}
-	public Boolean updateUser(User user){
+
+	public Boolean updateUser(User user) {
 		return userdao.update(user);
 	}
-	public Boolean changePassword(String password,String id){
+
+	public Boolean changePassword(String password, String id) {
 		return userdao.changePassword(password, id);
 	}
-	public List<User> queryAll(){		
+
+	public List<User> queryAll() {
 		return userdao.queryAll();
 	}
-	public List<User> queryName(String name){
+
+	public List<User> queryName(String name) {
 		return userdao.queryName(name);
+	}
+
+	public boolean updatePassword(String oldPassword, String password, String id) {
+		User user = userdao.getUser(id);
+		if (user.getPassword().equals(oldPassword)) {
+			userdao.changePassword(password, id);
+			return true;
+		}else{
+			return false;
+		}
+		
+
 	}
 }
