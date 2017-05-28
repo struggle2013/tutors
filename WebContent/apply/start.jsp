@@ -53,8 +53,8 @@
             placeholder="请输入研究方向" value="图像图像处理" required="required">
         </div>
         <div class="form-group">
-          <input type="file" name="file" class="layui-upload-file"  lay-type="file" />
-          <input type="text" name="file" value="" hidden="hidden" id="filename">
+          <input type="file" name="file" class="layui-upload-file" lay-type="file" /> <input
+            type="text" name="file" value="" hidden="hidden" id="filename">
         </div>
         <button type="submit" class="btn btn-primary block full-width " id="apply">申请</button>
 

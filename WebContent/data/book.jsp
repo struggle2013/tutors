@@ -74,8 +74,8 @@
             <div class="form-group">
               <label for="kwhymc" class="col-sm-2 control-label">出版社</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="press"
-                  placeholder="出版社" style="width: 30em;"> 
+                <input type="text" class="form-control input-sm" name="press" placeholder="出版社"
+                  style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="form-group">
-               <label for="jsxt" class="col-sm-2 control-label">参编字数</label>
+              <label for="jsxt" class="col-sm-2 control-label">参编字数</label>
               <div class="col-sm-10">
                 <input type="number" class="form-control input-sm" name="editWordNumber"
                   id="editWordNumber" value="" style="width: 30em;">
@@ -124,7 +124,8 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -154,8 +155,8 @@
               <label for="fbny" class="col-sm-2 control-label">发表时间</label>
               <div class="col-sm-10">
                 <div id="fbny1" class="input-append date">
-                  <input type="date" class="form-control input-sm" name="pressTime"
-                    id="pressTime" value="" style="width: 30em;"> <span class="add-on"><i
+                  <input type="date" class="form-control input-sm" name="pressTime" id="pressTime"
+                    value="" style="width: 30em;"> <span class="add-on"><i
                     class="icon-th"></i></span>
                 </div>
               </div>

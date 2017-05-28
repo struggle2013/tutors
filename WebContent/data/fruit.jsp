@@ -71,8 +71,8 @@
               <div class="form-group">
                 <label for="kwhymc" class="col-sm-2 control-label">成果鉴定、颁奖及采用部门</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-sm" name="address" placeholder="成果鉴定、颁奖及采用部门"
-                    style="width: 30em;">
+                  <input type="text" class="form-control input-sm" name="address"
+                    placeholder="成果鉴定、颁奖及采用部门" style="width: 30em;">
                 </div>
               </div>
               <div class="form-group">
@@ -146,13 +146,13 @@
                 <label for="fbny" class="col-sm-2 control-label">时间</label>
                 <div class="col-sm-10">
                   <div id="fbny1" class="input-append date">
-                    <input type="date" class="form-control input-sm" name="resultTime" id="resultTime"
-                      value="" style="width: 30em;"> <span class="add-on"><i
+                    <input type="date" class="form-control input-sm" name="resultTime"
+                      id="resultTime" value="" style="width: 30em;"> <span class="add-on"><i
                       class="icon-th"></i></span>
                   </div>
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <label for="pm" class="col-sm-2 control-label">本人排名</label>
                 <div class="col-sm-10">

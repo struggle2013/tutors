@@ -36,11 +36,11 @@ th span.right {
                 <td width="10%" rowspan="4" align="center" valign="middle" bgcolor="#FFFFFF">
                   <c:choose>
                     <c:when test="${empty user.pic}">
-                      <img id="Student11_Image1"  src=""
+                      <img id="Student11_Image1" src=""
                         style="height: 100px; width: 80px; border-width: 0px;">
                     </c:when>
                     <c:otherwise>
-                      <img id="Student11_Image1"  src="/upload/${user.pic }"
+                      <img id="Student11_Image1" src="/upload/${user.pic }"
                         style="height: 100px; width: 80px; border-width: 0px;">
                     </c:otherwise>
                   </c:choose>

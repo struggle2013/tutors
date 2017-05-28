@@ -35,10 +35,11 @@ public class DownloadServlet extends HttpServlet {
 		
 		// 获取用户下载的文件名称(url地址后追加数据,get)
         String fileName = request.getParameter("fileName");
+        System.out.println("文件名是："+fileName);
         fileName = new String(fileName.getBytes("ISO8859-1"),"UTF-8");
         
         // 先获取上传目录路径
-        String basePath = getServletContext().getRealPath("/upload");
+        String basePath = "D:/server/apache-tomcat-9.0.0.M15/webapps/upload";
         System.out.println("文件上传路径"+basePath+":文件名"+fileName);
         // 获取一个文件流
         InputStream in = new FileInputStream(new File(basePath,fileName));

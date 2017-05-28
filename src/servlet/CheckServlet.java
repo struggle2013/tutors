@@ -57,14 +57,32 @@ public class CheckServlet extends HttpServlet {
 		case "saveOpinion":
 			saveOpinion(request,response);
 			break;
+		case "query":
+			query(request,response);
+			break;
 		default:
 			break;
 		}
 	}
 
+	private void query(HttpServletRequest request, HttpServletResponse response) {
+		String power = request.getParameter("power");
+		String name = request.getParameter("name");
+		List<Apply> applys = applyDao.query(power,name);
+		request.setAttribute("applys", applys);
+		System.out.println("获取到的提交名单："+applys);
+		try {
+			request.getRequestDispatcher("apply/"+power+".jsp").forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	private void saveOpinion(HttpServletRequest request, HttpServletResponse response) {
 		OpinionDao opinonDao = new OpinionDao();
-
+		String power = (String) request.getSession().getAttribute("power");
+		System.out.println("ssion power:"+power);
 		Opinion opinion = new Opinion(UUID.randomUUID().toString());
 
 		Date date = new Date();
@@ -77,10 +95,10 @@ public class CheckServlet extends HttpServlet {
 			BeanUtils.populate(opinion, map);
 			System.out.println("意见是:" + opinion);
 			opinonDao.add(opinion);
-			List<Apply> applys= applyDao.getTechnologyCheck();
+			List<Apply> applys= applyDao.query(power,null);
 			request.setAttribute("applys", applys);
 			System.out.println("获取到的提交名单："+applys);
-			request.getRequestDispatcher("apply/technology.jsp").forward(request, response);
+			request.getRequestDispatcher("apply/"+power+".jsp").forward(request, response);
 			
 		} catch (  IllegalAccessException | InvocationTargetException | ServletException | IOException e) {
 			// TODO Auto-generated catch block
@@ -102,7 +120,16 @@ public class CheckServlet extends HttpServlet {
 			}
 			return;
 		} else {
-
+			try {
+				ApplyDao applyDao = new ApplyDao();
+				List<Apply> applys= applyDao.getSchoolDegreeCheck();
+				request.setAttribute("applys", applys);
+				request.getSession().setAttribute("power", "schoolDegree");
+				request.getRequestDispatcher("apply/schoolDegree.jsp").forward(request, response);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -114,12 +141,20 @@ public class CheckServlet extends HttpServlet {
 			try {
 				request.getRequestDispatcher("apply/missPower.html").forward(request, response);
 			} catch (ServletException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return;
 		} else {
-
+			try {
+				ApplyDao applyDao = new ApplyDao();
+				List<Apply> applys= applyDao.getDegreeCheck();
+				request.setAttribute("applys", applys);
+				request.getSession().setAttribute("power", "degree");
+				request.getRequestDispatcher("apply/degree.jsp").forward(request, response);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -140,7 +175,7 @@ public class CheckServlet extends HttpServlet {
 				ApplyDao applyDao = new ApplyDao();
 				List<Apply> applys= applyDao.getAcademyCheck();
 				request.setAttribute("applys", applys);
-				System.out.println("获取到的提交名单："+applys);
+				request.getSession().setAttribute("power", "academy");
 				request.getRequestDispatcher("apply/academy.jsp").forward(request, response);
 			} catch (ServletException | IOException e) {
 				// TODO Auto-generated catch block
@@ -163,7 +198,7 @@ public class CheckServlet extends HttpServlet {
 				
 				List<Apply> applys= applyDao.getTechnologyCheck();
 				request.setAttribute("applys", applys);
-				System.out.println("获取到的提交名单："+applys);
+				request.getSession().setAttribute("power", "technology");
 				request.getRequestDispatcher("apply/technology.jsp").forward(request, response);
 			}
 		} catch (ServletException | IOException e) {

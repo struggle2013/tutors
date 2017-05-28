@@ -21,7 +21,6 @@
 <link href="css/animate.css" rel="stylesheet">
 <link href="css/style.css?v=4.1.0" rel="stylesheet">
 </head>
-
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
   <div id="wrapper">
     <!--左侧导航开始-->
@@ -57,9 +56,7 @@
               <li><a class="J_menuItem" href="baseinfo/edit.jsp">个人信息修改</a></li>
               <li><a class="J_menuItem" href="baseinfo/passwordChange.jsp">登录密码修改</a></li>
               <li><a class="J_menuItem" href="UserInfoQuery?action=all">用户查询</a></li>
-
             </ul></li>
-
           <li class="line dk"></li>
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"><span class="ng-scope">遴选</span>
           </li>
@@ -82,23 +79,18 @@
               <li><a class="J_menuItem" href="CheckServlet?param=degree">学位分评定委员会审核</a></li>
               <li><a class="J_menuItem" href="CheckServlet?param=schoolDegree">校学位评定委员会审核</a></li>
             </ul></li>
-
           <li class="line dk"></li>
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"><span class="ng-scope">考核</span>
           </li>
-          <li><a href="index_v1.jsp"><i class="fa fa-check"></i> <span class="nav-label">年度考核</span><span
+          <li><a href="index_v1.jsp"><i class="fa fa-check"></i> <span class="nav-label">考核评优</span><span
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li><a class="J_menuItem" href="index_v1.jsp">查看考核成绩</a></li>
               <li><a class="J_menuItem" href="index_v1.jsp">考核教师</a></li>
-            </ul></li>
-
-          <li><a href="index_v1.jsp"><i class="fa fa-heart"></i> <span class="nav-label">评优表彰
-            </span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
               <li><a class="J_menuItem" href="index_v1.jsp">查看表彰</a></li>
               <li><a class="J_menuItem" href="index_v1.jsp">评优</a></li>
             </ul></li>
+
           <li class="line dk"></li>
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"><span class="ng-scope">公告</span>
           </li>

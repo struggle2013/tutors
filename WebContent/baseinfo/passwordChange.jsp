@@ -36,7 +36,8 @@
       </div>
 
 
-      <form class="m-t" role="form" id="form" action="/tutors/UpdateUser?action=updatePassword" method="post">
+      <form class="m-t" role="form" id="form" action="/tutors/UpdateUser?action=updatePassword"
+        method="post">
         <div class="form-group">
           <input type="text" class="form-control" name="oldPassword" placeholder="请输入旧密码">
         </div>

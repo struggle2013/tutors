@@ -5314,14 +5314,22 @@ ul.feed-item-list li:last-child, ul.list-item li:last-child {
 -webkit-transform
 
 
+
+
 :translateY(-10px)
+
+
 
 
 ;
 transform
 
 
+
+
 :translateY(-10px)
+
+
 
 
 }
@@ -5329,14 +5337,22 @@ transform
 -webkit-transform
 
 
+
+
 :translateY(0)
+
+
 
 
 ;
 transform
 
 
+
+
 :translateY(0)
+
+
 
 
 }
@@ -5351,14 +5367,22 @@ keyframes ball-pulse-sync { 33%{
 -webkit-transform
 
 
+
+
 :translateY(-10px)
+
+
 
 
 ;
 transform
 
 
+
+
 :translateY(-10px)
+
+
 
 
 }
@@ -5366,14 +5390,22 @@ transform
 -webkit-transform
 
 
+
+
 :translateY(0)
+
+
 
 
 ;
 transform
 
 
+
+
 :translateY(0)
+
+
 
 
 }

@@ -38,7 +38,7 @@
               <td>${teach.classHour }</td>
               <td>${teach.category }
               <td>${teach.remark }</td>
-              
+
               <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal"
                   data-target="#myModalUpdate" onclick="editInfo('${teach.id}',this)">修改</button>
@@ -66,42 +66,42 @@
             <div class="form-group">
               <label for="wzmc" class="col-sm-2 control-label">研究生课程名称</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="name" placeholder="名称" id="name"
-                  style="width: 30em;">
+                <input type="text" class="form-control input-sm" name="name" placeholder="名称"
+                  id="name" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
               <label for="kwhymc" class="col-sm-2 control-label">年份</label>
               <div class="col-sm-10">
                 <input type="number" class="form-control input-sm" name="year" id="year"
-                  placeholder="年份" style="width: 30em;"> 
+                  placeholder="年份" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
               <label for="fbny" class="col-sm-2 control-label">课时</label>
               <div class="col-sm-10">
                 <div id="fbny1" class="input-append date">
-                  <input type="number" class="form-control input-sm" name="classHour" id ="classHour"
+                  <input type="number" class="form-control input-sm" name="classHour" id="classHour"
                     value="" style="width: 30em;"> <span class="add-on"><i
                     class="icon-th"></i></span>
                 </div>
               </div>
             </div>
             <div class="form-group">
-               <label for="jsxt" class="col-sm-2 control-label">授课对象</label>
+              <label for="jsxt" class="col-sm-2 control-label">授课对象</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="category"
-                  id="category" value="" style="width: 30em;">
+                <input type="text" class="form-control input-sm" name="category" id="category"
+                  value="" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
               <label for="pm" class="col-sm-2 control-label">备注</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="remark"
-                  id="remark" value="" style="width: 30em;">
+                <input type="text" class="form-control input-sm" name="remark" id="remark" value=""
+                  style="width: 30em;">
               </div>
             </div>
-            
+
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">取消</button>
               <button type="submit" class="btn btn-primary">保存</button>
@@ -112,7 +112,8 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -124,45 +125,45 @@
         <div class="modal-body">
           <form class="form-horizontal" id="dialogII"
             action="/tutors/DataServlet?action=update&param=paper" method="post">
-               <div class="form-group">
+            <div class="form-group">
               <label for="wzmc" class="col-sm-2 control-label">研究生课程名称</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="name" placeholder="名称" id="name"
-                  style="width: 30em;">
+                <input type="text" class="form-control input-sm" name="name" placeholder="名称"
+                  id="name" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
               <label for="kwhymc" class="col-sm-2 control-label">年份</label>
               <div class="col-sm-10">
                 <input type="number" class="form-control input-sm" name="year" id="year"
-                  placeholder="年份" style="width: 30em;"> 
+                  placeholder="年份" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
               <label for="fbny" class="col-sm-2 control-label">课时</label>
               <div class="col-sm-10">
                 <div id="fbny1" class="input-append date">
-                  <input type="number" class="form-control input-sm" name="classHour" id ="classHour"
+                  <input type="number" class="form-control input-sm" name="classHour" id="classHour"
                     value="" style="width: 30em;"> <span class="add-on"><i
                     class="icon-th"></i></span>
                 </div>
               </div>
             </div>
             <div class="form-group">
-               <label for="jsxt" class="col-sm-2 control-label">授课对象</label>
+              <label for="jsxt" class="col-sm-2 control-label">授课对象</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="category"
-                  id="category" value="" style="width: 30em;">
+                <input type="text" class="form-control input-sm" name="category" id="category"
+                  value="" style="width: 30em;">
               </div>
             </div>
             <div class="form-group">
               <label for="pm" class="col-sm-2 control-label">备注</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control input-sm" name="remark"
-                  id="remark" value="" style="width: 30em;">
+                <input type="text" class="form-control input-sm" name="remark" id="remark" value=""
+                  style="width: 30em;">
               </div>
             </div>
-            
+
             <input type="text" value="" style="display: none;" id="id">
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">取消</button>

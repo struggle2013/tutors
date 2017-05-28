@@ -56,7 +56,6 @@
                             <td>${book.editWordNumber }
                             <td>${book.signatureOrder }</td>
                             <td>${book.school}</td>
-                            <td></td>
                           </tr>
                         </c:forEach>
                       </tbody>
@@ -77,22 +76,20 @@
                       <thead>
                         <tr>
                           <th>项目名称</th>
-                          <th>时间</th>
                           <th>成果鉴定、颁奖及采用部门</th>
+                          <th>时间</th>
                           <th>本人排名</th>
                           <th>是否是本校成果</th>
-                          <th>操作</th>
                         </tr>
                       </thead>
                       <tbody id="vbody">
-                        <c:forEach var="result" items="${results }">
+                        <c:forEach var="fruit" items="${fruits }">
                           <tr>
-                            <td>${paper.name }</td>
-                            <td>${paper.publication }</td>
-                            <td>${paper.publicationTime }</td>
-                            <td>${paper.signatureOrder }</td>
-                            <td>${paper.school}</td>
-
+                            <td>${fruit.name }</td>
+                            <td>${fruit.address }</td>
+                            <td>${fruit.resultTime }</td>
+                            <td>${fruit.signatureOrder }</td>
+                            <td>${fruit.school}</td>
                           </tr>
                         </c:forEach>
                       </tbody>
@@ -153,17 +150,17 @@
                           <th>课时</th>
                           <th>授课对象</th>
                           <th>备注</th>
-                          <th>操作</th>
+
                         </tr>
                       </thead>
                       <tbody id="vbody">
                         <c:forEach var="teach" items="${teachs }">
                           <tr>
-                            <td>${paper.name }</td>
-                            <td>${paper.publication }</td>
-                            <td>${paper.publicationTime }</td>
-                            <td>${paper.signatureOrder }</td>
-                            <td>${paper.school}</td>
+                            <td>${teach.name }</td>
+                            <td>${teach.year }</td>
+                            <td>${teach.classHour }</td>
+                            <td>${teach.category }</td>
+                            <td>${teach.remark}</td>
 
                           </tr>
                         </c:forEach>
@@ -185,22 +182,24 @@
                         <th>项目、课题名称 (编号、合同号)</th>
                         <th>项目来源</th>
                         <th>负责人</th>
-                        <th>起止时间</th>
+                        <th>开始时间</th>
                         <th>经费总额</th>
                         <th>本人可支 配经费数</th>
                         <th>本人排名</th>
                         <th>是否是本校成果</th>
-                        <th>操作</th>
                       </tr>
                     </thead>
                     <tbody id="vbody">
                       <c:forEach var="project" items="${projects }">
                         <tr>
-                          <td>${paper.name }</td>
-                          <td>${paper.publication }</td>
-                          <td>${paper.publicationTime }</td>
-                          <td>${paper.signatureOrder }</td>
-                          <td>${paper.school}</td>
+                          <td>${project.name }</td>
+                          <td>${project.projectSource }</td>
+                          <td>${project.personInCharge }</td>
+                          <td>${project.startTime }</td>
+                          <td>${project.fundAll}</td>
+                          <td>${project.myFund}</td>
+                          <td>${project.signatureOrder}</td>
+                          <td>${project.school}</td>
                         </tr>
                       </c:forEach>
                     </tbody>
@@ -212,7 +211,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">审批通过</button>
+    <a class="btn btn-success" onclick="location.href='javascript:history.go(-1);'">返回</a>
   </div>
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog">

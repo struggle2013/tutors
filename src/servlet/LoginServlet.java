@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ApplyDao;
+import entity.Schedule;
 import entity.User;
 import service.UserService;
 
@@ -42,6 +44,11 @@ private void userlogin(HttpServletRequest request, HttpServletResponse response)
 		request.getSession().setAttribute("name", user.getName());
 		// 重定向到不同身份用户的主页
 		if (user.getIsTutor()==1) {
+//			ApplyDao applyDao = new ApplyDao();
+//			Schedule schedule =applyDao .getSchedule(user.getId());
+//			request.setAttribute("schedule", schedule);
+//			System.out.println("schedule:"+schedule);
+//			response.sendRedirect("");
 			out.write("tutorNav.jsp");
 		} else if (user.getIsTutor()==0) {
 			out.write("userNav.jsp");

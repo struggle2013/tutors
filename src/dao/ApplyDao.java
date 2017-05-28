@@ -3,17 +3,16 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import entity.Apply;
+import entity.Opinion;
 import entity.Schedule;
-import entity.User;
-import util.DataBaseUtils;
 import util.JdbcUtils;
 
 public class ApplyDao {
@@ -23,11 +22,9 @@ public class ApplyDao {
 		try {
 			conn = JdbcUtils.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 	public boolean addApply(Apply apply) {
 		String sql = "insert into apply(id,userId,category,oneSubject,twoSubject,direction,file) values(?,?,?,?,?,?,?)";
 		try {
@@ -96,7 +93,7 @@ public class ApplyDao {
 	public List<Apply> getSchoolDegreeCheck() {
 		List<Apply> applys = new ArrayList<Apply>();
 		String sql = "select apply.id,userId,category,oneSubject,twoSubject,direction,user.name as username,file from "
-				+ "apply,user,schedule where schedule.schoolDegree=0 and schedule.degree=1 and schedule.academy=1 and schedule.technology=1 and and apply.userId=user.id and apply.userId = schedule.id";
+				+ "apply,user,schedule where schedule.schoolDegree=0 and schedule.degree=1 and schedule.academy=1 and schedule.technology=1 and apply.userId=user.id and apply.userId = schedule.id";
 		try {
 			applys = queryRunner.query(sql, new BeanListHandler<Apply>(Apply.class));
 		} catch (SQLException e) {
@@ -154,9 +151,58 @@ public class ApplyDao {
 		try {
 			schedule = queryRunner.query(sql, new BeanHandler<Schedule>(Schedule.class), id);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		OpinionDao opinionDao = new OpinionDao();
+		List<Opinion> opinions = opinionDao.getOpinionByUser(id);
+		for (Opinion opinion : opinions) {
+			switch (opinion.getKind()) {
+			case "technology":
+				schedule.setTsuggestion(opinion.getSuggestion());
+				break;
+			case "academy":
+				schedule.setAsuggestion(opinion.getSuggestion());
+				break;
+			case "degree":
+				schedule.setDsuggestion(opinion.getSuggestion());
+				break;
+			case "schoolDegree":
+				schedule.setSsuggestion(opinion.getSuggestion());
+				break;
+			default:
+				break;
+			}
+		}
 		return schedule;
+	}
+	
+	public List<Apply> query(String kind,String name){
+		if(name == null){  
+            name ="%%";  
+        }else{  
+            name ="%"+ name +"%";  
+        }  
+		List<Apply> applys = new ArrayList<Apply>();
+		String sql = "";
+		switch (kind) {
+		case "technology":
+			sql = "select * from thlcheckview where username like ?";
+			break;
+		case "academy":
+			sql = "select * from academycheckview where username like ?";
+			break;
+		case "degree":
+			sql = "select * from degreecheckview where username like ?";
+			break;
+		case "schoolDegree":
+			sql = "select * from sdcheckview where username like ?";
+			break;
+		}
+		try {
+			applys = queryRunner.query(sql,new BeanListHandler<Apply>(Apply.class),name);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return applys;
 	}
 }

@@ -74,27 +74,20 @@
           <li><a href="index_v1.jsp"><i class="fa fa-check-circle-o"></i> <span
               class="nav-label">导师遴选</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li><a class="J_menuItem" href="index_v1.jsp">导师申请</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">查看申请进度</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">科技处审查</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">学院初审</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">学位分评定委员会审核</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">校学位评定委员会审核</a></li>
+              <li><a class="J_menuItem" href="CheckServlet?param=technology">科技处审查</a></li>
+              <li><a class="J_menuItem" href="CheckServlet?param=academy">学院初审</a></li>
+              <li><a class="J_menuItem" href="CheckServlet?param=degree">学位分评定委员会审核</a></li>
+              <li><a class="J_menuItem" href="CheckServlet?param=schoolDegree">校学位评定委员会审核</a></li>
             </ul></li>
 
           <li class="line dk"></li>
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"><span class="ng-scope">考核</span>
           </li>
-          <li><a href="index_v1.jsp"><i class="fa fa-check"></i> <span class="nav-label">年度考核</span><span
+          <li><a href="index_v1.jsp"><i class="fa fa-check"></i> <span class="nav-label">考核评优</span><span
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li><a class="J_menuItem" href="index_v1.jsp">查看考核成绩</a></li>
               <li><a class="J_menuItem" href="index_v1.jsp">考核教师</a></li>
-            </ul></li>
-
-          <li><a href="index_v1.jsp"><i class="fa fa-heart"></i> <span class="nav-label">评优表彰
-            </span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
               <li><a class="J_menuItem" href="index_v1.jsp">查看表彰</a></li>
               <li><a class="J_menuItem" href="index_v1.jsp">评优</a></li>
             </ul></li>
@@ -116,7 +109,6 @@
             <ul class="nav nav-second-level">
               <li><a class="J_menuItem" href="index_v1.jsp">权限分配</a></li>
               <li><a class="J_menuItem" href="index_v1.jsp">修改管理员密码</a></li>
-
             </ul></li>
 
         </ul>

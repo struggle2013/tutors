@@ -51,8 +51,10 @@ public class OpinionDao {
 	}
 
 	public boolean add(Opinion opinion) {
+		
 		String sql = "insert into opinion(id,agree,suggestion,time,chargePerson,kind,userId) values(?,?,?,?,?,?,?)";
 		try {
+			checked(opinion);
 			queryRunner.update(sql, opinion.getId(),opinion.getAgree(),opinion.getSuggestion(),
 					opinion.getTime(),opinion.getChargePerson(),opinion.getKind(),opinion.getUserId());
 			updateSchedule(opinion);
@@ -65,12 +67,28 @@ public class OpinionDao {
 	public boolean updateSchedule(Opinion opinion){
 		
 		String sql = "update schedule set "+opinion.getKind()+"="+opinion.getAgree()+" where id = ?";
+		
 		try {
 			queryRunner.update(sql, opinion.getUserId());
+			if(opinion.getKind().equals("schoolDegree") && opinion.getAgree()==1){
+				sql = "update user set isTutor=1 where id = ?";
+				queryRunner.update(sql,opinion.getUserId());
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;
+	}
+	private void checked(Opinion opinion){
+		String sql = "select * from opinion where kind=? and userId=?";
+		try {
+			Opinion op =queryRunner.query(sql, new BeanHandler<Opinion>(Opinion.class),opinion.getKind(),opinion.getUserId());
+			if(op!=null){
+				sql = "delete from opinion where id = ?";
+				queryRunner.update(sql,op.getId());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

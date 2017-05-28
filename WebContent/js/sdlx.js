@@ -15,8 +15,6 @@ $(function() {
 		$(this).val($.trim(x));
 	});
 	
-	
-	
 
 	$('#errorMessage').modal({
 		keyboard : false

@@ -13,6 +13,7 @@ import service.UserService;
 
 public class UserServiceTest {
 	UserService userService = new UserService();
+	ApplyDao applyDao = new ApplyDao();
 	User user=null;
 	@Test
 	public void TestGetUser(){
@@ -50,8 +51,18 @@ public class UserServiceTest {
 	}
 	@Test
 	public void Test3(){
-		ApplyDao applyDao = new ApplyDao();
+		
 		List<Apply> applys = applyDao.getDegreeCheck();
 		System.out.println(applys);
+	}
+	@Test
+	public void Test4(){
+		List<Apply> applys = applyDao.query("technology", "小王");
+		System.out.println(applys);
+	}
+	@Test
+	public void Test5(){
+		Schedule schedule = applyDao.getSchedule("2292946166@qq.com");
+		System.out.println(schedule);
 	}
 }

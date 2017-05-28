@@ -1,6 +1,5 @@
 package servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
@@ -16,16 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.ApplyDao;
+import dao.BookDao;
+import dao.FruitDao;
 import dao.OpinionDao;
 import dao.PaperDao;
+import dao.ProjectDao;
+import dao.TeachDao;
 import dao.UserDao;
 import entity.Apply;
+import entity.Book;
 import entity.Opinion;
 import entity.Paper;
 import entity.Schedule;
@@ -91,8 +91,12 @@ public class ApplyServlet extends HttpServlet {
 				request.getRequestDispatcher("apply/msg.jsp").forward(request, response);
 				break;
 			}
-			Schedule schedule = applyDao.getSchedule(id);
+			//OpinionDao opinionDao = new OpinionDao();
+			//List<Opinion> opinions = opinionDao.getOpinionByUser(id);
+			//System.out.println(opinions);
+			Schedule schedule =applyDao.getSchedule(id);
 			request.setAttribute("schedule", schedule);
+			System.out.println("schedule:"+schedule);
 			request.getRequestDispatcher("apply/schedule.jsp").forward(request, response);
 			break;
 		case "query":
@@ -136,8 +140,18 @@ public class ApplyServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		//设置论文列表到request
 		PaperDao paperDao = new PaperDao();
+		BookDao bookDao = new BookDao();
+		ProjectDao projectDao = new ProjectDao();
+		FruitDao fruitDao = new FruitDao();
+		TeachDao teachDao = new TeachDao();
+		
 		List<Paper> papers = paperDao.getPapersByUser(userId);
 		request.setAttribute("papers",papers);
+		request.setAttribute("books", bookDao.getBooksByUser(userId));
+		request.setAttribute("projects", projectDao.getProjectsByUser(userId));
+		request.setAttribute("fruits", fruitDao.getFruitsByUser(userId));
+		request.setAttribute("teachs", teachDao.getTeachsByUser(userId));
+		
 		UserDao userdao = new UserDao();
 		
 		request.setAttribute("username", userdao.getUser(userId).getName());

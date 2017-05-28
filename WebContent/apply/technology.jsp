@@ -17,22 +17,26 @@
     <div class="col-sm-12">
       <div class="ibox">
         <div class="ibox-title">
-          <h3>所有未通过科技处审查的教师</h3>
+          <h3>待学院审查的教师</h3>
         </div>
         <div class="ibox-content">
           <div class="row m-b-sm m-t-sm">
             <div class="col-md-1">
-              <a type="button"  class="btn btn-white btn-sm" href="/tutors/CheckServlet?param=technology">
-                <i class="fa fa-refresh"></i> 刷新
+              <a type="button" class="btn btn-white btn-sm"
+                href="/tutors/CheckServlet?param=technology"> <i class="fa fa-refresh"></i> 刷新
               </a>
             </div>
             <div class="col-md-11">
-              <div class="input-group">
-                <input type="text" placeholder="请输入姓名" class="input-sm form-control"> <span
-                  class="input-group-btn">
-                  <button type="button" class="btn btn-sm btn-primary">搜索</button>
-                </span>
-              </div>
+              <form action="/tutors/CheckServlet?param=query&power=technology" method="post">
+                <div class="input-group">
+
+                  <input type="text" placeholder="请输入姓名" class="input-sm form-control" value=""
+                    name="name"> <span class="input-group-btn">
+                    <button type="submit" class="btn btn-sm btn-primary">搜索</button>
+                  </span>
+
+                </div>
+              </form>
             </div>
           </div>
 
@@ -67,10 +71,8 @@
                         onclick="pass('${apply.userId}')">通过</button>
                       <button class="btn btn-danger" data-toggle="modal" data-target="#myModal"
                         onclick="notPass('${apply.userId}')">不通过</button>
-                      <a class="btn btn-info" href="UploadServlet?fileName='${apply.file }'">下载文档</a>
-                      <%--    
-                        href="ApplyServlet?action=notPass?userId=${apply.userId }"
-                        class="btn btn-danger"><i></i> 不通过 </a> --%>
+                      <a class="btn btn-info" href="/upload/${apply.file }">下载申请表</a>
+
                     </td>
                   </tr>
                 </c:forEach>
@@ -123,7 +125,7 @@
   </div>
   <script src="/tutors/js/jquery.min.js?v=2.1.4"></script>
   <script src="/tutors/js/bootstrap.min.js"></script>
-   <script type="text/javascript">
+  <script type="text/javascript">
 	    
 	    function pass(value){
 			$("#userId").val(value);
@@ -133,6 +135,6 @@
 		$("#userId").val(value);
 		$("#agree").val(-1);
 	    }
-	</script> 
+	</script>
 </body>
 </html>

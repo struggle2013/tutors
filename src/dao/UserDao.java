@@ -14,6 +14,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.mchange.v2.c3p0.impl.C3P0ImplUtils;
 
+import entity.Power;
 import entity.User;
 import util.DataBaseUtils;
 import util.JdbcUtils;
@@ -114,35 +115,51 @@ public class UserDao {
 		return users;
 	}
 	public boolean checkTechnology(String userId){
-		String sql = "select technology from power where userId=?";
-		int ok = 0;
+		String sql = "select * from power where userId=?";
+		Power power=null;
 		try {
-			ok = queryRunner.query(sql, new ScalarHandler<>("technology"),userId);
+			 power= queryRunner.query(sql, new BeanHandler<Power>(Power.class),userId);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return false;
 		}
-		
-		if(ok==1){return true;}
+		if(power==null){return false;}
+		if(power.getTechnology()==1){return true;}
 		return false;
 	}
 	public boolean checkAcademy(String userId){
 		String sql = "select academy from power where userId=?";
-		int ok =DataBaseUtils.getForValue(sql, userId);
-		if(ok==1){return true;}
+		Power power=null;
+		try {
+			 power= queryRunner.query(sql, new BeanHandler<Power>(Power.class),userId);
+		} catch (SQLException e) {
+			return false;
+		}
+		if(power==null){return false;}
+		if(power.getAcademy()==1){return true;}
 		return false;
 	}
 	public boolean checkSchoolDegree(String userId){
 		String sql = "select schoolDegree from power where userId=?";
-		
-		int ok =DataBaseUtils.getForValue(sql, userId);
-		if(ok==1){return true;}
+		Power power=null;
+		try {
+			 power= queryRunner.query(sql, new BeanHandler<Power>(Power.class),userId);
+		} catch (SQLException e) {
+			return false;
+		}
+		if(power==null){return false;}
+		if(power.getSchoolDegree()==1){return true;}
 		return false;
 	}
 	public boolean checkDegree(String userId){
 		String sql = "select degree from power where userId=?";
-		int ok =DataBaseUtils.getForValue(sql, userId);
-		if(ok==1){return true;}
+		Power power=null;
+		try {
+			 power= queryRunner.query(sql, new BeanHandler<Power>(Power.class),userId);
+		} catch (SQLException e) {
+			return false;
+		}
+		if(power==null){return false;}
+		if(power.getDegree()==1){return true;}
 		return false;
 	}
 	

@@ -58,7 +58,7 @@
   </div>
 
   <!-- 全局js -->
- <script src="js/jquery.min.js?v=2.1.4"></script>
+  <script src="js/jquery.min.js?v=2.1.4"></script>
   <!-- <script src="js/bootstrap.min.js?v=3.3.6"></script>  -->
 
   <script type="text/javascript">
@@ -74,7 +74,6 @@ $(function () {
 					"border" : "1px solid red"
 				});
 			} else {
-				
 				window.location.replace(result);
 			}
 		});
