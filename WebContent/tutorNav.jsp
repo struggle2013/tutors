@@ -97,9 +97,9 @@
           <li><a href="index_v1.jsp"><i class="fa fa-info-circle"></i> <span
               class="nav-label">公告</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li><a class="J_menuItem" href="index_v1.jsp">查看公告</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">发布公告</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">修改公告</a></li>
+              <li><a class="J_menuItem" href="NoticeServlet?action=queryAll">查看公告</a></li>
+              <li><a class="J_menuItem" href="NoticeServlet?action=add">发布公告</a></li>
+              <li><a class="J_menuItem" href="NoticeServlet?action=update">修改公告</a></li>
             </ul></li>
           <li class="line dk"></li>
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"><span class="ng-scope">系统管理</span>
