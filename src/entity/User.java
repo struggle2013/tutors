@@ -43,6 +43,7 @@ public class User {
 	private String graduatedMajor;
 	private int isTutor;
 	private String pic;
+	private Power power;
 	public User(String id,String name,String password){
 		super();
 		this.id=id;
@@ -51,14 +52,49 @@ public class User {
 	}
 
 	
+	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", sex=" + sex
 				+ ", titleSubject=" + titleSubject + ", birth=" + birth + ", nation=" + nation + ", face=" + face
 				+ ", telephone=" + telephone + ", address=" + address + ", title=" + title + ", degree=" + degree
 				+ ", eduBackground=" + eduBackground + ", graduatedSchool=" + graduatedSchool + ", graduatedTime="
-				+ graduatedTime + ", graduatedMajor=" + graduatedMajor + ", isTutor=" + isTutor + ", pic=" + pic + "]";
+				+ graduatedTime + ", graduatedMajor=" + graduatedMajor + ", isTutor=" + isTutor + ", pic=" + pic
+				+ ", power=" + power + "]";
 	}
+
+
+
+
+	public User(String id, String name, String email, String password, String sex, String titleSubject, String birth,
+			String nation, String face, String telephone, String address, String title, String degree,
+			String eduBackground, String graduatedSchool, String graduatedTime, String graduatedMajor, int isTutor,
+			String pic, Power power) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.sex = sex;
+		this.titleSubject = titleSubject;
+		this.birth = birth;
+		this.nation = nation;
+		this.face = face;
+		this.telephone = telephone;
+		this.address = address;
+		this.title = title;
+		this.degree = degree;
+		this.eduBackground = eduBackground;
+		this.graduatedSchool = graduatedSchool;
+		this.graduatedTime = graduatedTime;
+		this.graduatedMajor = graduatedMajor;
+		this.isTutor = isTutor;
+		this.pic = pic;
+		this.power = power;
+	}
+
+
 
 
 	public String getId() {
@@ -248,5 +284,15 @@ public class User {
 
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+
+
+	public Power getPower() {
+		return power;
+	}
+
+
+	public void setPower(Power power) {
+		this.power = power;
 	}
 }

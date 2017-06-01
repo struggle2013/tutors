@@ -49,9 +49,9 @@ private void userlogin(HttpServletRequest request, HttpServletResponse response)
 //			request.setAttribute("schedule", schedule);
 //			System.out.println("schedule:"+schedule);
 //			response.sendRedirect("");
-			out.write("tutorNav.jsp");
+			out.write("IndexServlet?param=tutor");
 		} else if (user.getIsTutor()==0) {
-			out.write("userNav.jsp");
+			out.write("IndexServlet?param=user");
 		} 
 
 	} else {

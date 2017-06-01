@@ -34,7 +34,7 @@
       <div>
         <h1 class="logo-name">CUIT</h1>
       </div>
-      <h3>欢迎使用 研究生导师管理系统登录</h3>
+      <h2 style="font-size: 42px">研究生导师管理系统</h2>
 
       <form class="m-t" role="form">
         <div class="form-group">

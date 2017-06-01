@@ -116,7 +116,6 @@ th span.right {
                 <td bgcolor="#FFFFFF">
                   <span>${user.address }</span>
                 </td>
-
               </tr>
             </tbody>
           </table>

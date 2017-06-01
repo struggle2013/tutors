@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="renderer" content="webkit">
 
-<title>主页</title>
+<title>研究生导师管理</title>
 
 <meta name="keywords" content="">
 <meta name="description" content="">
@@ -34,18 +34,18 @@
           <li class="nav-header">
             <div class="dropdown profile-element">
               <a data-toggle="dropdown" class="dropdown-toggle" href="index_v1.jsp"> <span
-                class="clear"> <span class="block m-t-xs" style="font-size: 20px;"> <i
-                    class="fa fa-user"></i> <strong class="font-bold">CUIT</strong>
+                class="clear"> <span class="block m-t-xs" style="font-size: 15px;"> <i
+                    class="fa fa-user"></i> <strong class="font-bold">CUIT研究生导师管理</strong>
                 </span>
               </span>
               </a>
             </div>
-            <div class="logo-element">CUIT</div>
+            <div class="logo-element">CUIT研究生导师管理</div>
           </li>
 
           <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"><span class="ng-scope">信息</span>
           </li>
-          <li><a class="J_menuItem" href="index_v1.jsp"> <i class="fa fa-home"></i> <span
+          <li><a class="J_menuIte" href="IndexServlet?param=user"> <i class="fa fa-home"></i> <span
               class="nav-label">主页</span>
           </a></li>
           <li><a href="#"> <i class="fa fa-address-card"></i> <span class="nav-label">基本信息管理</span>
@@ -85,10 +85,10 @@
           <li><a href="index_v1.jsp"><i class="fa fa-check"></i> <span class="nav-label">考核评优</span><span
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li><a class="J_menuItem" href="index_v1.jsp">查看考核成绩</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">考核教师</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">查看表彰</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">评优</a></li>
+             <li><a class="J_menuItem" href="AssessmentServlet?action=lookupScore">查看考核成绩</a></li>
+              <li><a class="J_menuItem" href="AssessmentServlet?action=assessmentScore">考核</a></li>
+              <li><a class="J_menuItem" href="AssessmentServlet?action=lookupGood">查看评优</a></li>
+              <li><a class="J_menuItem" href="AssessmentServlet?action=assessmentGood">评优</a></li>
             </ul></li>
 
           <li class="line dk"></li>
@@ -97,8 +97,8 @@
           <li><a href="index_v1.jsp"><i class="fa fa-info-circle"></i> <span
               class="nav-label">公告</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li><a class="J_menuItem" href="announcement/announcement.jsp">查看公告</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">发布公告</a></li>
+              <li><a class="J_menuItem" href="NoticeServlet?action=queryAll">查看公告</a></li>
+              <li><a class="J_menuItem" href="NoticeServlet">发布公告</a></li>
               <li><a class="J_menuItem" href="index_v1.jsp">修改公告</a></li>
             </ul></li>
           <li class="line dk"></li>
@@ -107,9 +107,8 @@
           <li><a href="index_v1.jsp"><i class="fa fa-wrench"></i> <span class="nav-label">系统管理</span><span
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li><a class="J_menuItem" href="index_v1.jsp">权限分配</a></li>
-              <li><a class="J_menuItem" href="index_v1.jsp">修改管理员密码</a></li>
-
+              <li><a class="J_menuItem" href="SysAdminServlet?action=powerAdmin&param=all">权限分配</a></li>
+              <li><a class="J_menuItem" href="SysAdminServlet?action=adminPassword">管理员密码修改</a></li>
             </ul></li>
 
         </ul>

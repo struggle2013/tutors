@@ -126,6 +126,33 @@ public class UserDao {
 		if(power.getTechnology()==1){return true;}
 		return false;
 	}
+	public Power getPower(String userId){
+		String sql = "select * from power where userId=?";
+		Power power=null;
+		try {
+			power = queryRunner.query(sql, new BeanHandler<Power>(Power.class),userId);
+			if(power==null){
+				sql = "insert into power(userId) values(?)";
+				queryRunner.update(sql,userId);
+				power = new Power();
+				power.setUserId(userId);
+				return power;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return power;
+	}
+	public void updatePower(Power power){
+		String sql = "update power set technology=? , academy=? , degree=? ,schoolDegree=? where userId=?";
+		try {
+			queryRunner.update(sql,power.getTechnology(),power.getAcademy(),power.getDegree(),power.getSchoolDegree(),power.getUserId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public boolean checkAcademy(String userId){
 		String sql = "select academy from power where userId=?";
 		Power power=null;
@@ -162,6 +189,30 @@ public class UserDao {
 		if(power.getDegree()==1){return true;}
 		return false;
 	}
-	
+	public boolean checkSys(String sysusername,String syspassword){
+		String sql = "select password from sysuser where username=?";
+		try {
+			String password =queryRunner.query(sql, new ScalarHandler<String>(),sysusername);
+			if(password!=null&&password.equals(syspassword)){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean updateSysPassword(String oldPassword,String passworld,String username){
+		String sql = "update sysuser set password=? where username=?";
+		try {
+			int count=queryRunner.update(sql,passworld,username);
+			if(count==1){
+				return true;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+		return false;
+	}
 	
 }
